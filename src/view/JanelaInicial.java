@@ -112,7 +112,5 @@ public class JanelaInicial extends Canvas {
         frame.dispose();
     }
 
-    public static void main(String[] args) {
-        new JanelaInicial();
-    }
+    
 }
