@@ -12,7 +12,7 @@ import model.Partida;
 import view.*;
 
 public class Controller {
-	/*comentario*/
+	
     public Partida partida;
     private JanelaInicial janelaInicial;
     private JanelaCarregamento janelaCarregamento;
