@@ -12,7 +12,7 @@ import model.Partida;
 import view.*;
 
 public class Controller {
-
+	/*comentario*/
     public Partida partida;
     private JanelaInicial janelaInicial;
     private JanelaCarregamento janelaCarregamento;
@@ -20,8 +20,8 @@ public class Controller {
     private JanelaMao maoDealer;
     private JanelaMaoJogador maoJogador;
     private JanelaMaoJogador maoJogadorSplit;
-    private TratadorDeClicks tratador;
-    public boolean split;
+    private TratadorDeClicks tratador;   
+    public boolean split;   
 
     public Controller() {
         janelaInicial = new JanelaInicial();
