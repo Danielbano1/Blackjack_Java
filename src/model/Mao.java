@@ -19,7 +19,7 @@ public class Mao {
 
     public int calculaValorMao() {
         int total = 0;
-        int numAs =0 ;
+        int numAs = 0;
         for(Carta carta : lista_cartas) {
             total += carta.getValor();
             if(carta.getValor()==1)
@@ -44,6 +44,5 @@ public class Mao {
     public boolean estourou() {
         return this.calculaValorMao() >= 21;
     }
-
 
 }
