@@ -29,9 +29,4 @@ public class MaoJogador extends Mao {
         return aposta;
     }
 
-
-
-
-
-
 }
