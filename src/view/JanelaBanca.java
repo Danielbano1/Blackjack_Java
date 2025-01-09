@@ -2,59 +2,58 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.*;
-import javax.imageio.ImageIO;
-import controller.Controller;
 
 public class JanelaBanca extends JFrame {
     private Image fundo;
     private Image[] fichas = new Image[6];
-    private Rectangle[] fichaBounds = new Rectangle[6];
-    private String placarTexto = null; // Texto do placar
-    private boolean exibirPlacar = false; // Controle de exibição do placar
+    private Rectangle[] fichasBounds = new Rectangle[6];
 
-
-    public JanelaBanca() {
-        configurarJanela();
-        carregarImagens();
-        setVisible(true);
-    }
-
-    private void configurarJanela() {
-        setTitle("Blackjack - Mesa da Banca");
+    public JanelaBanca(){
+        setTitle("Blackjack - Janela Banca");
         setSize(1006, 761);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
         setMinimumSize(new Dimension(1006, 761));
         setMaximumSize(new Dimension(1366, 768));
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
-    }
 
-    private void carregarImagens() {
-        String[] paths = { "resources/blackjack.bmp", "resources/ficha1.png", "resources/ficha5.png",
-                "resources/ficha10.png", "resources/ficha20.png", "resources/ficha50.png", "resources/ficha100.png" };
-        try {
-            fundo = ImageIO.read(new File(paths[0]));
-            for (int i = 1; i < paths.length; i++) {
-                fichas[i - 1] = ImageIO.read(new File(paths[i]));
-            }
-        } catch (IOException e) {
-            System.err.println("Erro ao carregar imagens: " + e.getMessage());
-        }
+        carregarImagens();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
+        desenhaImagens(g2d);
+    }
+
+    private void carregarImagens() {
+        // Lista de imagens
+        String[] nomesDasFichas = {"ficha1.png", "ficha5.png", "ficha10.png", "ficha20.png",
+                "ficha50.png", "ficha100.png"};
+        String nomeDoFundo = "blackjack.png";
+
+        // Carregar a imagen do fundo usando Toolkit
+        fundo = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/" + nomeDoFundo));
+
+        // Carregar as imagens das fichas usando Toolkit
+        for (int i = 0; i < nomesDasFichas.length; i++) {
+            fichas[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/" + nomesDasFichas[i]));
+        }
+    }
+
+    // Tambem cria os retangulos das fichas
+    private void desenhaImagens(Graphics2D g2d){
+        // Desenha o fundo
         if (fundo != null) {
-            g2.drawImage(fundo, 0, 0, getWidth(), getHeight(), this);
+            g2d.drawImage(fundo, 0, 0, getWidth(), getHeight(), this);
         }
 
+        // Desenha as fichas
         int largura = 60, altura = 60, espacamento = 5;
         int total = fichas.length * largura + (fichas.length - 1) * espacamento;
         int xInicio = (getWidth() - total) / 2;
@@ -63,30 +62,14 @@ public class JanelaBanca extends JFrame {
         for (int i = 0; i < fichas.length; i++) {
             if (fichas[i] != null) {
                 int x = xInicio + i * (largura + espacamento);
-                g2.drawImage(fichas[i], x, y, largura, altura, this);
-                fichaBounds[i] = new Rectangle(x, y, largura, altura);
+                g2d.drawImage(fichas[i], x, y, largura, altura, this);
+                fichasBounds[i] = new Rectangle(x, y, largura, altura);
             }
         }
-        // Desenha o placar se necessário
-        if (exibirPlacar && placarTexto != null) {
-            g2.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 24));
-            g2.setColor(Color.YELLOW);
-            int xTexto = (getWidth() / 2) - 150;
-            int yTexto = getHeight() - 300;
-            g2.drawString(placarTexto, xTexto, yTexto);
-        }
     }
 
-    public Rectangle[] getFichaBounds() {
-        return fichaBounds;
+    public Rectangle[] getFichasBounds(){
+        return fichasBounds;
     }
 
-    public void exibePlacar(String resultado) {
-        // Define o texto do placar com base no resultado
-        placarTexto = resultado;
-        exibirPlacar = true;
-
-        // Repaint para atualizar a tela
-        repaint();
-    }
 }

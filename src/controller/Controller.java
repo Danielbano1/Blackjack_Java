@@ -29,10 +29,10 @@ public class Controller {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Point p = e.getPoint();
-                if (janelaInicial.getBotaoNovoJogoBounds().contains(p)) {
+                if (janelaInicial.getBotaoNovoJogo().contains(p)) {
                     System.out.println("Botão 'Novo Jogo' clicado");
                     iniciarJogo();
-                } else if (janelaInicial.getBotaoContinuarBounds().contains(p)) {
+                } else if (janelaInicial.getBotaoCarregarJogo().contains(p)) {
                     iniciarJogo(SalvarPartida.carregarPartida(1));
                     System.out.println("Botão 'Continuar Jogo' clicado");
                 }
@@ -212,7 +212,7 @@ public class Controller {
                 placar += "Mao " + (i+1) + "Empate    ";
             }
         }
-        janelaBanca.exibePlacar(placar);
+        //janelaBanca.exibePlacar(placar);
     }
 
     void fazDouble() {
