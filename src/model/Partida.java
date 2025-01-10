@@ -315,5 +315,13 @@ public class Partida {
     public boolean estadoAtual(Estado estadoAtual) {
     	return gerenciadorDeEstados.getEstadoAtual() == estadoAtual;
     }
+    //passa a partida para o proximo estado
+    public void passaEstado() {
+    	gerenciadorDeEstados.proxEstado();
+    }
+    //verifica se o hit pode ser feito
+    public boolean checkPassaTermina(int turno) {
+    	return (checkEstouro() && getTurnos()==turno);
+    }
     
 }

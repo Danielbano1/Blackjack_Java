@@ -33,7 +33,7 @@ public class TratadorDeClicks {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Point p = e.getPoint();
-                if (partida.gerenciadorDeEstados.getEstadoAtual() == Estado.APOSTA) {
+                if (partida.estadoAtual(Estado.APOSTA)) {
                     int aposta = 0;
 
                     if (botoesBounds[3].contains(p)) {
@@ -44,7 +44,7 @@ public class TratadorDeClicks {
                     else if (botoesBounds[4].contains(p)) {
                         if (partida.validaAposta()) {
                             System.out.println("Aposta validada");
-                            partida.gerenciadorDeEstados.proxEstado();
+                            partida.passaEstado();
                             controller.distribuirCartas();
                         } else
                             System.out.println("Aposta abaixo de 50");
@@ -124,14 +124,14 @@ public class TratadorDeClicks {
                                         controller.distribuir1Carta();
                                     else if(partida.getTurnos()==1)
                                         controller.distribuir1CartaSplit();
-                                    if (partida.checkEstouro() && partida.getTurnos()==0)
+                                    if (partida.checkPassaOuTermina(0))
                                         partida.terminaTurno();
-                                    else if (partida.checkEstouro() && partida.getTurnos()==1)
-                                        partida.gerenciadorDeEstados.proxEstado();
+                                    else if (partida.checkPassaOuTermina(1))
+                                        partida.passaEstado();
 
                                 }
                                 else {
-                                    partida.gerenciadorDeEstados.proxEstado();
+                                    partida.passaEstado();
 
                                 }
                                 System.out.println("valido 5");
@@ -139,9 +139,9 @@ public class TratadorDeClicks {
                             } else if (i == 6) {
 
                                 if (!partida.isSplit())
-                                    partida.gerenciadorDeEstados.proxEstado();
+                                    partida.passaEstado();
                                 else if (partida.getTurnos() == 1)
-                                    partida.gerenciadorDeEstados.proxEstado();
+                                    partida.passaEstado();
 
                                 partida.terminaTurno();
 
