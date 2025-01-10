@@ -148,7 +148,7 @@ public class TratadorDeClicks {
                             } else if (i == 7) {
                                 if (partida.rendicao()) {
                                     controller.fazSurrender();
-                                    partida.gerenciadorDeEstados.setEstadoAtual(Estado.FIM);
+                                    partida.defineEstado(Estado.FIM);
                                     System.out.println("valido 7");
                                 }
 

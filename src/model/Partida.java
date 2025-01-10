@@ -323,5 +323,9 @@ public class Partida {
     public boolean checkPassaOuTermina(int turno) {
     	return (checkEstouro() && getTurnos()==turno);
     }
+    //define o estado do jogo
+    public void defineEstado(Estado estado) {
+    	gerenciadorDeEstados.setEstadoAtual(Estado.FIM);
+    }
     
 }
