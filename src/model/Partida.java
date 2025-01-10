@@ -122,7 +122,7 @@ public class Partida {
 
         MaoJogador maoAtual = (MaoJogador) maos.get(turnos);
 
-        if (maoAtual.getLista_cartas().size() == 2) {// tirar e por no tratador
+        if (maoAtual.getLista_cartas().size() == 2) {
 
             int aposta = maoAtual.getAposta();
 
@@ -131,6 +131,7 @@ public class Partida {
                 hit(maoAtual);
                 terminaTurno();
                 return true;
+                
             } else
                 return false;
 
@@ -307,37 +308,4 @@ public class Partida {
         return maos.getLast();
     }
     
-    //estruturtas para a fachada 
-    //verifica se uma ficha pode ser retirada
-    public boolean checkReducao(int valorFicha) {
-    	return (getMaoJogador().getAposta()-valorFicha >= 0);
-    }
-    //passa a partida para o proximo estado
-    public void passaEstado() {
-    	gerenciadorDeEstados.proxEstado();
-    }
-    //verifica se o hit pode ser feito
-    public boolean checkPassaOuTermina(int turno) {
-    	return (checkEstouro() && getTurnos()==turno);
-    }
-    //define o estado do jogo
-    public void defineEstadoFim() {
-    	gerenciadorDeEstados.setEstadoAtual(Estado.FIM);
-    }
-    //verifica o estado dealer
-    public boolean partidaEstadoDealer() {
-    	return gerenciadorDeEstados.getEstadoAtual() == Estado.DEALER;
-    }
-    //verifica o estado dealer
-    public boolean partidaEstadoFim() {
-    	return gerenciadorDeEstados.getEstadoAtual() == Estado.FIM;
-    }
-    //verifica o estado dealer
-    public boolean partidaEstadoJogo() {
-    	return gerenciadorDeEstados.getEstadoAtual() == Estado.JOGO;
-    }
-    //verifica o estado dealer
-    public boolean partidaEstadoAposta() {
-    	return gerenciadorDeEstados.getEstadoAtual() == Estado.APOSTA;
-    }
 }
