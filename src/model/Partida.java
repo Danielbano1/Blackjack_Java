@@ -306,4 +306,6 @@ public class Partida {
     public Mao getMaoDealer(){
         return maos.getLast();
     }
+    //estruturtas para a fachada 
+    
 }

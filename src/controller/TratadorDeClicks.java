@@ -54,34 +54,34 @@ public class TratadorDeClicks {
                         if (fichaBounds[i] != null && fichaBounds[i].contains(p)) {
                             System.out.println("Ficha " + (i + 1) + " clicada!");
                             if (i == 0) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-1) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3  && (partida.getMaoJogador().getAposta()-1) >= 0)
                                     aposta = -1;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 1;
                             }
 
                             else if (i == 1) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-5) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-5) >= 0)
                                     aposta = -5;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 5;
                             } else if (i == 2) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-10) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-10) >= 0)
                                     aposta = -10;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 10;
                             } else if (i == 3) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-20) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-20) >= 0)
                                     aposta = -20;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 20;
                             } else if (i == 4) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-50) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-50) >= 0)
                                     aposta = -50;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 50;
                             } else if (i == 5) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-100) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-100) >= 0)
                                     aposta = -100;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 100;
