@@ -1,3 +1,0 @@
-# Ignorar diretórios binários e arquivos .class
-bin/
-*.class
