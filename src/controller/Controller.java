@@ -91,7 +91,7 @@ public class Controller {
         maoJogador.repaint();
 
     }
-
+    
     void distribuirCartasSalvas(){
         // Configurações para o Dealer
         ArrayList<String> naipes = apiModel.getNaipesDealer();

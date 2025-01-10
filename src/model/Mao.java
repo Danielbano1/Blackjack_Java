@@ -2,12 +2,13 @@ package model;
 
 import java.util.*;
 
- class Mao {
+ class Mao implements ObservadoIF {
 
     private ArrayList<Carta> lista_cartas;
+    private List<ObservadorIF> observadores = new ArrayList<ObservadorIF>();
 
     Mao() {	//construtor
-        this.lista_cartas = new ArrayList<>();  // cria uma lista para as cartas na mao						//mao nao passou e não é 21 em valor ainda
+        this.lista_cartas = new ArrayList<>();  // cria uma lista para as cartas na mao						
     }
 
     Mao(List<Carta> cartas){
@@ -32,6 +33,7 @@ import java.util.*;
         }
         return total;
     }
+    
 
     void limpaMao() {
         lista_cartas.clear();
@@ -43,6 +45,19 @@ import java.util.*;
 
     boolean estourou() {
         return this.calculaValorMao() >= 21;
+    }
+    
+    // Observer
+    public void add(ObservadorIF o){
+        observadores.add(o);
+    }
+
+    public void remove(ObservadorIF o){
+        observadores.remove(o);
+    }
+
+    public Object get(){
+        return this;
     }
 
 }
