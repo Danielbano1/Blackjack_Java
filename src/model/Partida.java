@@ -320,7 +320,7 @@ public class Partida {
     	gerenciadorDeEstados.proxEstado();
     }
     //verifica se o hit pode ser feito
-    public boolean checkPassaTermina(int turno) {
+    public boolean checkPassaOuTermina(int turno) {
     	return (checkEstouro() && getTurnos()==turno);
     }
     
