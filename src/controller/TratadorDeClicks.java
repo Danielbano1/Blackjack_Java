@@ -100,7 +100,7 @@ public class TratadorDeClicks {
                         if (botoesBounds[i].contains(p)) {
                             System.out.println("Botão '" + botoesLabels[i] + "' clicado!");
                             if (i == 0) {
-                                //SalvarPartida.salvarPartida(apimodel);
+                                apimodel.salvarPartida();;
                                 System.out.println("valido 0");
 
                             } else if (i == 1 ) {

@@ -1,8 +1,4 @@
-package controller;
-
-import model.Carta;
-import model.MaoJogador;
-import model.Partida;
+package model;
 
 import java.io.File;
 import java.io.PrintWriter;

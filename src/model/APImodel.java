@@ -22,6 +22,15 @@ public class APImodel {
 	
 	//estruturtas para a fachada 
 	
+	public static List<Object> carregarPartida(int nome){
+		return SalvarPartida.carregarPartida(nome);
+		
+	}
+	
+	public void salvarPartida() {
+		SalvarPartida.salvarPartida(partida);
+	} 
+	
 	public int getDinheiro() {
 		return partida.getDinheiro();
 	}

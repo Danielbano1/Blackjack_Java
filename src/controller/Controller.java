@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.APImodel;
+import model.SalvarPartida;
 import view.*;
 
 public class Controller {
@@ -32,7 +33,7 @@ public class Controller {
                     System.out.println("Botão 'Novo Jogo' clicado");
                     iniciarJogo();
                 } else if (janelaInicial.getBotaoCarregarJogo().contains(p)) {
-                    iniciarJogo(SalvarPartida.carregarPartida(1));
+                    iniciarJogo(apiModel.carregarPartida(1));
                     System.out.println("Botão 'Continuar Jogo' clicado");
                 }
             }
