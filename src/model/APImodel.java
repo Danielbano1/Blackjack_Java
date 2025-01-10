@@ -6,8 +6,8 @@ public class APImodel {
 	private GerenciadorDeEstados gerenciadorDeEstados;
 	
 	
-	private APImodel(Partida partida) {
-		this.partida = partida;
+	public APImodel() {
+		this.partida = new Partida();
 		gerenciadorDeEstados = this.partida.gerenciadorDeEstados;
 	}
 	
