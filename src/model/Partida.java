@@ -306,14 +306,11 @@ public class Partida {
     public Mao getMaoDealer(){
         return maos.getLast();
     }
+    
     //estruturtas para a fachada 
     //verifica se uma ficha pode ser retirada
     public boolean checkReducao(int valorFicha) {
-    	return (getMaoJogador().getAposta()-1 >= 0);
-    }
-    //retorna o estado atual
-    public boolean estadoAtual(Estado estadoAtual) {
-    	return gerenciadorDeEstados.getEstadoAtual() == estadoAtual;
+    	return (getMaoJogador().getAposta()-valorFicha >= 0);
     }
     //passa a partida para o proximo estado
     public void passaEstado() {
@@ -324,8 +321,23 @@ public class Partida {
     	return (checkEstouro() && getTurnos()==turno);
     }
     //define o estado do jogo
-    public void defineEstado(Estado estado) {
+    public void defineEstadoFim() {
     	gerenciadorDeEstados.setEstadoAtual(Estado.FIM);
     }
-    
+    //verifica o estado dealer
+    public boolean partidaEstadoDealer() {
+    	return gerenciadorDeEstados.getEstadoAtual() == Estado.DEALER;
+    }
+    //verifica o estado dealer
+    public boolean partidaEstadoFim() {
+    	return gerenciadorDeEstados.getEstadoAtual() == Estado.FIM;
+    }
+    //verifica o estado dealer
+    public boolean partidaEstadoJogo() {
+    	return gerenciadorDeEstados.getEstadoAtual() == Estado.JOGO;
+    }
+    //verifica o estado dealer
+    public boolean partidaEstadoAposta() {
+    	return gerenciadorDeEstados.getEstadoAtual() == Estado.APOSTA;
+    }
 }

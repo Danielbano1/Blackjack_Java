@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import model.Estado;
+
 import model.Partida;
 import view.JanelaBanca;
 
@@ -33,7 +33,7 @@ public class TratadorDeClicks {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Point p = e.getPoint();
-                if (partida.estadoAtual(Estado.APOSTA)) {
+                if (partida.partidaEstadoAposta()) {
                     int aposta = 0;
 
                     if (botoesBounds[3].contains(p)) {
@@ -94,7 +94,7 @@ public class TratadorDeClicks {
                     controller.fazerApostas();
                 }
 
-                if (partida.estadoAtual(Estado.JOGO)) {
+                if (partida.partidaEstadoJogo()) {
                     for (int i = 0; i < botoesBounds.length; i++) {
                         if (botoesBounds[i].contains(p)) {
                             System.out.println("Botão '" + botoesLabels[i] + "' clicado!");
@@ -148,7 +148,7 @@ public class TratadorDeClicks {
                             } else if (i == 7) {
                                 if (partida.rendicao()) {
                                     controller.fazSurrender();
-                                    partida.defineEstado(Estado.FIM);
+                                    partida.defineEstadoFim();
                                     System.out.println("valido 7");
                                 }
 
@@ -157,7 +157,7 @@ public class TratadorDeClicks {
 
                     }
                 }
-                if (partida.estadoAtual(Estado.DEALER)) {
+                if (partida.partidaEstadoDealer()) {
                     controller.jogaDealer();
                 }
 
