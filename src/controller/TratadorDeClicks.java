@@ -5,14 +5,15 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import model.Estado;
-import model.Partida;
+
+
+import model.APImodel;
 import view.JanelaBanca;
 
 public class TratadorDeClicks {
-    Controller controller;
-    JanelaBanca janelaBanca;
-    Partida partida;
+    private Controller controller;
+    private JanelaBanca janelaBanca;
+    private APImodel apimodel;
     private Rectangle[] botoesBounds;
     private final String[] botoesLabels = { "EXIT", "DOUBLE", "SPLIT", "CLEAR", "DEAL", "HIT", "STAND", "SURRENDER" };
     private Rectangle[] fichaBounds;
@@ -20,7 +21,7 @@ public class TratadorDeClicks {
     public TratadorDeClicks(Controller controller, JanelaBanca janelaBanca) {
         this.controller = controller;
         this.janelaBanca = janelaBanca;
-        partida = controller.partida;
+       
 
         configurarBotoes();
         fichaBounds = janelaBanca.getFichaBounds();
@@ -33,18 +34,18 @@ public class TratadorDeClicks {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Point p = e.getPoint();
-                if (partida.gerenciadorDeEstados.getEstadoAtual() == Estado.APOSTA) {
+                if (apimodel.partidaEstadoAposta()) {
                     int aposta = 0;
 
                     if (botoesBounds[3].contains(p)) {
-                        partida.devolveAposta();
+                        apimodel.devolveAposta();
                         System.out.println("Aposta devolvida"); 
                     }
 
                     else if (botoesBounds[4].contains(p)) {
-                        if (partida.validaAposta()) {
+                        if (apimodel.validaAposta()) {
                             System.out.println("Aposta validada");
-                            partida.gerenciadorDeEstados.proxEstado();
+                            apimodel.passaEstado();
                             controller.distribuirCartas();
                         } else
                             System.out.println("Aposta abaixo de 50");
@@ -54,56 +55,56 @@ public class TratadorDeClicks {
                         if (fichaBounds[i] != null && fichaBounds[i].contains(p)) {
                             System.out.println("Ficha " + (i + 1) + " clicada!");
                             if (i == 0) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-1) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-1))
                                     aposta = -1;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 1;
                             }
 
                             else if (i == 1) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-5) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-5))
                                     aposta = -5;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 5;
                             } else if (i == 2) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-10) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-10))
                                     aposta = -10;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 10;
                             } else if (i == 3) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-20) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-20))
                                     aposta = -20;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 20;
                             } else if (i == 4) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-50) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-50))
                                     aposta = -50;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 50;
                             } else if (i == 5) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && partida.getMaoJogador().getAposta() > 0 && (partida.getMaoJogador().getAposta()-100) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-100))
                                     aposta = -100;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 100;
                             }
 
-                            if (partida.checkAposta(aposta) == false)
+                            if (apimodel.checkAposta(aposta) == false)
                                 System.out.println("Dinheiro insuficiente");
                         }
                     }
                     controller.fazerApostas();
                 }
 
-                if (partida.gerenciadorDeEstados.getEstadoAtual() == Estado.JOGO) {
+                if (apimodel.partidaEstadoJogo()) {
                     for (int i = 0; i < botoesBounds.length; i++) {
                         if (botoesBounds[i].contains(p)) {
                             System.out.println("Botão '" + botoesLabels[i] + "' clicado!");
                             if (i == 0) {
-                                SalvarPartida.salvarPartida(partida);
+                                //SalvarPartida.salvarPartida(apimodel);
                                 System.out.println("valido 0");
 
                             } else if (i == 1 ) {
-                                if(partida.doDouble()) {
+                                if(apimodel.doDouble()) {
                                     controller.fazDouble();
                                 }
 
@@ -111,44 +112,44 @@ public class TratadorDeClicks {
 
                             } else if (i == 2) {
                                 if (controller.split == false) {
-                                    partida.split();
-                                    if (partida.isSplit()) {
+                                    apimodel.split();
+                                    if (apimodel.isSplit()) {
                                         controller.fazSplit();
                                     }
                                     System.out.println("Valido 2");
                                 }
                             } else if (i == 5 ) {
-                                if (!partida.checkEstouro()) {
-                                    partida.hit();
-                                    if(partida.getTurnos()==0)
+                                if (!apimodel.checkEstouro()) {
+                                    apimodel.hit();
+                                    if(apimodel.getTurnos()==0)
                                         controller.distribuir1Carta();
-                                    else if(partida.getTurnos()==1)
+                                    else if(apimodel.getTurnos()==1)
                                         controller.distribuir1CartaSplit();
-                                    if (partida.checkEstouro() && partida.getTurnos()==0)
-                                        partida.terminaTurno();
-                                    else if (partida.checkEstouro() && partida.getTurnos()==1)
-                                        partida.gerenciadorDeEstados.proxEstado();
+                                    if (apimodel.checkPassaOuTermina(0))
+                                        apimodel.terminaTurno();
+                                    else if (apimodel.checkPassaOuTermina(1))
+                                        apimodel.passaEstado();
 
                                 }
                                 else {
-                                    partida.gerenciadorDeEstados.proxEstado();
+                                    apimodel.passaEstado();
 
                                 }
                                 System.out.println("valido 5");
 
                             } else if (i == 6) {
 
-                                if (!partida.isSplit())
-                                    partida.gerenciadorDeEstados.proxEstado();
-                                else if (partida.getTurnos() == 1)
-                                    partida.gerenciadorDeEstados.proxEstado();
+                                if (!apimodel.isSplit())
+                                    apimodel.passaEstado();
+                                else if (apimodel.getTurnos() == 1)
+                                    apimodel.passaEstado();
 
-                                partida.terminaTurno();
+                                apimodel.terminaTurno();
 
                             } else if (i == 7) {
-                                if (partida.rendicao()) {
+                                if (apimodel.rendicao()) {
                                     controller.fazSurrender();
-                                    partida.gerenciadorDeEstados.setEstadoAtual(Estado.FIM);
+                                    apimodel.defineEstadoFim();
                                     System.out.println("valido 7");
                                 }
 
@@ -157,7 +158,7 @@ public class TratadorDeClicks {
 
                     }
                 }
-                if (partida.gerenciadorDeEstados.getEstadoAtual() == Estado.DEALER) {
+                if (apimodel.partidaEstadoDealer()) {
                     controller.jogaDealer();
                 }
 

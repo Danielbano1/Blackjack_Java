@@ -122,7 +122,7 @@ public class Partida {
 
         MaoJogador maoAtual = (MaoJogador) maos.get(turnos);
 
-        if (maoAtual.getLista_cartas().size() == 2) {// tirar e por no tratador
+        if (maoAtual.getLista_cartas().size() == 2) {
 
             int aposta = maoAtual.getAposta();
 
@@ -131,6 +131,7 @@ public class Partida {
                 hit(maoAtual);
                 terminaTurno();
                 return true;
+                
             } else
                 return false;
 
@@ -306,4 +307,5 @@ public class Partida {
     public Mao getMaoDealer(){
         return maos.getLast();
     }
+    
 }

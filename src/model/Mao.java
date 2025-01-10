@@ -2,24 +2,24 @@ package model;
 
 import java.util.*;
 
-public class Mao {
+ class Mao {
 
     private ArrayList<Carta> lista_cartas;
 
-    public Mao() {	//construtor
+    Mao() {	//construtor
         this.lista_cartas = new ArrayList<>();  // cria uma lista para as cartas na mao						//mao nao passou e não é 21 em valor ainda
     }
 
-    public Mao(List<Carta> cartas){
+    Mao(List<Carta> cartas){
         this.lista_cartas = (ArrayList<Carta>) cartas;
     }
-    public void addCarta(Carta carta) {
+    void addCarta(Carta carta) {
         lista_cartas.add(carta);
     }
 
-    public int calculaValorMao() {
+    int calculaValorMao() {
         int total = 0;
-        int numAs =0 ;
+        int numAs = 0;
         for(Carta carta : lista_cartas) {
             total += carta.getValor();
             if(carta.getValor()==1)
@@ -33,17 +33,16 @@ public class Mao {
         return total;
     }
 
-    public void limpaMao() {
+    void limpaMao() {
         lista_cartas.clear();
     }
 
-    public ArrayList<Carta> getLista_cartas() {
+    ArrayList<Carta> getLista_cartas() {
         return lista_cartas;
     }
 
-    public boolean estourou() {
+    boolean estourou() {
         return this.calculaValorMao() >= 21;
     }
-
 
 }

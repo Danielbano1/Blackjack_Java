@@ -1,10 +1,10 @@
 package model;
 
-public class Carta {
+ class Carta {
     private String naipe;
     private int valor;
 
-    Carta (String valor, String naipe){
+   Carta (String valor, String naipe){
         if("tjqk".contains(valor))
             this.valor = 10;
 
@@ -19,18 +19,17 @@ public class Carta {
         this.naipe = valor + naipe;
     }
 
-    public Carta (String naipe, int valor){
+    Carta (String naipe, int valor){
         this.naipe = naipe;
         this.valor = valor;
     }
 
-    public String getNaipe() {
+    String getNaipe() {
         return naipe;
     }
 
-    public int getValor() {
+    int getValor() {
         return valor;
     }
-
 
 }
