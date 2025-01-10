@@ -306,4 +306,83 @@ public class Partida {
     public Mao getMaoDealer(){
         return maos.getLast();
     }
+    
+    // api model
+    public int getApostaMaoAtual() {
+    	return getMaoJogador().getAposta();
+    }
+    
+    public int getApostaMaoPrincipal() {
+    	return getMaoPrincipal().calculaValorMao();
+    }
+    
+    public int getApostaMaoSplit() {
+    	return getMaoSplit().calculaValorMao();
+    }
+    
+    // retorna ArrayList<String> de naipes da mao do dealer
+    public ArrayList<String> getNaipesDealer(){
+    	return retornaListaCartas(getMaoDealer());
+    }
+    // retorna ArrayList<String> de naipes da mao principal
+    public ArrayList<String> getNaipesPrincipal(){
+    	return retornaListaCartas(getMaoPrincipal());
+    }
+    
+ // retorna ArrayList<String> de naipes da mao split
+    public ArrayList<String> getNaipesSplit(){
+    	return retornaListaCartas(getMaoSplit());
+    }
+    
+    public int calculaValorMaoDealer() {
+    	return getMaoDealer().calculaValorMao();
+    }
+    
+    public int calculaValorMaoPrincipal() {
+    	return getMaoPrincipal().calculaValorMao();
+    }
+
+    public int calculaValorMaoSplit() {
+    	return getMaoSplit().calculaValorMao();
+    }
+    
+    // retorna naipe da primeira carta da mao
+    public String getPrimeiroNaipeDealer() {
+    	return getNaipesDealer().getFirst();
+    }
+    
+    public String getPrimeiroNaipePrincipal() {
+    	return getNaipesPrincipal().getFirst();
+    }
+    
+    public String getPrimeiroNaipeSplit() {
+    	return getNaipesSplit().getFirst();
+    }
+    
+    public String getUltimoNaipeDealer() {
+    	return getNaipesDealer().getLast();
+    }
+    
+    public String getUltimoNaipePrincipal() {
+    	return getNaipesPrincipal().getLast();
+    }
+    
+    public String getUltimoNaipeSplit() {
+    	return getNaipesSplit().getLast();
+    }
+    
+    // double remover
+    public int calculaValorMaoAnterior() {
+    	return getMaoAnterior().calculaValorMao();
+    }
+    
+    public String getNaipeMaoAnterior() {
+    	return getMaoAnterior().getLista_cartas().getLast().getNaipe();
+    }
+    
+    public int getApostaMaoAnterior() {
+    	return getMaoAnterior().getAposta();
+    }
+  
+
 }

@@ -17,7 +17,7 @@ public class Controller {
     private JanelaInicial janelaInicial;
     private JanelaCarregamento janelaCarregamento;
     private JanelaBanca janelaBanca;
-    private JanelaMao maoDealer;
+    private JanelaMao maoDealer; 
     private JanelaMaoJogador maoJogador;
     private JanelaMaoJogador maoJogadorSplit;
     private TratadorDeClicks tratador;   
@@ -87,24 +87,24 @@ public class Controller {
     void fazerApostas() {
         // Carregar dinheiro
         maoJogador.atualizarDinheiro(partida.getDinheiro());
-        maoJogador.atualizarAposta(partida.getMaoJogador().getAposta());
+        maoJogador.atualizarAposta(partida.getApostaMaoAtual());
         maoJogador.repaint();
 
     }
 
     void distribuirCartasSalvas(){
         // Configurações para o Dealer
-        ArrayList<String> naipes = partida.retornaListaCartas(partida.getMaoDealer());
-        maoDealer.atualizarPontos(partida.getMaos().getLast().calculaValorMao());
+        ArrayList<String> naipes = partida.getNaipesDealer();
+        maoDealer.atualizarPontos(partida.calculaValorMaoDealer());
 
         for (String naipe : naipes){
             maoDealer.receberCarta(naipe);
         }
         // Configurações para o Jogador Principal
-        naipes = partida.retornaListaCartas(partida.getMaoPrincipal());
+        naipes = partida.getNaipesPrincipal();
         maoJogador.atualizarDinheiro(partida.getDinheiro());
-        maoJogador.atualizarPontos(partida.getMaoPrincipal().calculaValorMao());
-        maoJogador.atualizarAposta(partida.getMaoPrincipal().getAposta());
+        maoJogador.atualizarPontos(partida.calculaValorMaoPrincipal());
+        maoJogador.atualizarAposta(partida.getApostaMaoPrincipal());
 
         for (String naipe : naipes){
             maoJogador.receberCarta(naipe);
@@ -112,10 +112,10 @@ public class Controller {
 
         if(partida.isSplit()) {
             // Configurações para o Jogador Split
-            naipes = partida.retornaListaCartas(partida.getMaoSplit());
+            naipes = partida.getNaipesSplit();
             maoJogadorSplit.atualizarDinheiro(partida.getDinheiro());
-            maoJogadorSplit.atualizarPontos(partida.getMaoSplit().calculaValorMao());
-            maoJogadorSplit.atualizarAposta(partida.getMaoSplit().getAposta());
+            maoJogadorSplit.atualizarPontos(partida.calculaValorMaoSplit());
+            maoJogadorSplit.atualizarAposta(partida.getApostaMaoSplit());
 
 
             for (String naipe : naipes){
@@ -129,35 +129,35 @@ public class Controller {
         partida.distribuiCarta();
         partida.getMaoJogador().getLista_cartas();
         // Configurações para o Dealer
-        maoDealer.atualizarPontos(partida.getMaos().getLast().calculaValorMao());
-        maoDealer.receberCarta(partida.getMaos().getLast().getLista_cartas().getFirst().getNaipe());
-        maoDealer.receberCarta(partida.getMaos().getLast().getLista_cartas().getLast().getNaipe());
+        maoDealer.atualizarPontos(partida.calculaValorMaoDealer());
+        maoDealer.receberCarta(partida.getPrimeiroNaipeDealer());
+        maoDealer.receberCarta(partida.getUltimoNaipeDealer());
 
         // Configurações para o Jogador Principal
-        maoJogador.atualizarPontos(partida.getMaoJogador().calculaValorMao());
-        maoJogador.receberCarta(partida.getMaoJogador().getLista_cartas().getFirst().getNaipe());
-        maoJogador.receberCarta(partida.getMaoJogador().getLista_cartas().getLast().getNaipe());
+        maoJogador.atualizarPontos(partida.calculaValorMaoPrincipal());
+        maoJogador.receberCarta(partida.getPrimeiroNaipePrincipal());
+        maoJogador.receberCarta(partida.getUltimoNaipePrincipal());
 
     }
 
     void distribuir1Carta() {
         // Configurações para o Jogador Principal
-        maoJogador.atualizarPontos(partida.getMaoJogador().calculaValorMao());
-        maoJogador.receberCarta(partida.getMaoJogador().getLista_cartas().getLast().getNaipe());
+        maoJogador.atualizarPontos(partida.calculaValorMaoPrincipal());
+        maoJogador.receberCarta(partida.getUltimoNaipePrincipal());
 
     }
     void distribuirCartaSplit() {
         // Configurações para o Split Principal
-        maoJogadorSplit.atualizarPontos(partida.getMaos().get(1).calculaValorMao());
-        maoJogadorSplit.receberCarta(partida.getMaos().get(1).getLista_cartas().getFirst().getNaipe());
-        maoJogadorSplit.receberCarta(partida.getMaos().get(1).getLista_cartas().getLast().getNaipe());
+        maoJogadorSplit.atualizarPontos(partida.calculaValorMaoSplit());
+        maoJogadorSplit.receberCarta(partida.getPrimeiroNaipeSplit());
+        maoJogadorSplit.receberCarta(partida.getUltimoNaipeSplit());
 
     }
 
     void distribuir1CartaSplit() {
         // Configurações para o split Principal
-        maoJogadorSplit.atualizarPontos(partida.getMaos().get(1).calculaValorMao());
-        maoJogadorSplit.receberCarta(partida.getMaos().get(1).getLista_cartas().getLast().getNaipe());
+        maoJogadorSplit.atualizarPontos(partida.calculaValorMaoSplit());
+        maoJogadorSplit.receberCarta(partida.getUltimoNaipeSplit());
 
     }
 
@@ -166,7 +166,7 @@ public class Controller {
         partida.jogaDealer();
         // Configurações para o Dealer
         ArrayList<String> naipes = partida.retornaListaCartas();
-        maoDealer.atualizarPontos(partida.getMaos().getLast().calculaValorMao());
+        maoDealer.atualizarPontos(partida.calculaValorMaoDealer());
 
         for (int i = naipes.size(); i > 2; i--)
             maoDealer.receberCarta(naipes.get(i - 1));
@@ -179,7 +179,7 @@ public class Controller {
 
     void fazSplit() {
         //atualização de dinheiro e aposta
-        maoJogadorSplit.atualizarAposta(partida.getMaoJogador().getAposta());
+        maoJogadorSplit.atualizarAposta(partida.getApostaMaoAtual());
         maoJogador.atualizarDinheiro(partida.getDinheiro());
         maoJogadorSplit.atualizarDinheiro(partida.getDinheiro());
         //distribuição de cartas
@@ -216,23 +216,23 @@ public class Controller {
     }
 
     void fazDouble() {
-
+    	
         if (partida.getTurnos() == 1) { // turno mao principal
-            maoJogador.atualizarPontos(partida.getMaoAnterior().calculaValorMao());
-            maoJogador.receberCarta(partida.getMaoAnterior().getLista_cartas().getLast().getNaipe());
+            maoJogador.atualizarPontos(partida.calculaValorMaoAnterior());
+            maoJogador.receberCarta(partida.getNaipeMaoAnterior());
             System.out.println("teste aposta jogador");
             maoJogador.atualizarDinheiro(partida.getDinheiro());
-            maoJogador.atualizarAposta(partida.getMaoAnterior().getAposta());
+            maoJogador.atualizarAposta(partida.getApostaMaoAnterior());
             if (!partida.isSplit())
                 partida.gerenciadorDeEstados.proxEstado();
 
         }
         if (partida.isSplit() && partida.getTurnos() == 2) { // turno split
-            maoJogadorSplit.atualizarPontos(partida.getMaoAnterior().calculaValorMao());
-            maoJogadorSplit.receberCarta(partida.getMaoAnterior().getLista_cartas().getLast().getNaipe());
+            maoJogadorSplit.atualizarPontos(partida.calculaValorMaoAnterior());
+            maoJogadorSplit.receberCarta(partida.getNaipeMaoAnterior());
             System.out.println("teste aposta split");
             maoJogadorSplit.atualizarDinheiro(partida.getDinheiro());
-            maoJogadorSplit.atualizarAposta(partida.getMaoAnterior().getAposta());
+            maoJogadorSplit.atualizarAposta(partida.getApostaMaoAnterior());
             maoJogador.atualizarDinheiro(partida.getDinheiro());
             partida.gerenciadorDeEstados.proxEstado();
 
