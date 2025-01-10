@@ -21,7 +21,7 @@ public class TratadorDeClicks {
     public TratadorDeClicks(Controller controller, JanelaBanca janelaBanca) {
         this.controller = controller;
         this.janelaBanca = janelaBanca;
-       
+       apimodel = controller.apiModel;
 
         configurarBotoes();
         fichaBounds = janelaBanca.getFichaBounds();

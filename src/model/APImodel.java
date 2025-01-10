@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Partida;
 public class APImodel {
 	private Partida partida;
@@ -11,7 +14,18 @@ public class APImodel {
 		gerenciadorDeEstados = this.partida.gerenciadorDeEstados;
 	}
 	
+	public APImodel(List<Object> infos) {
+		this.partida = new Partida(infos);
+		gerenciadorDeEstados = this.partida.gerenciadorDeEstados;
+	}
+
+	
 	//estruturtas para a fachada 
+	
+	public int getDinheiro() {
+		return partida.getDinheiro();
+	}
+	
     //verifica se uma ficha pode ser retirada
     public boolean checkReducao(int valorFicha) {
     	return (partida.getMaoJogador().getAposta() - valorFicha >= 0);
@@ -81,6 +95,95 @@ public class APImodel {
     public boolean rendicao() {
     	return partida.rendicao();
     }
+    
+    public int getApostaMaoAtual() {
+    	return partida.getMaoJogador().getAposta();
+    }
+    
+    public int getApostaMaoPrincipal() {
+    	return partida.getMaoPrincipal().calculaValorMao();
+    }
+    
+    public int getApostaMaoSplit() {
+    	return partida.getMaoSplit().calculaValorMao();
+    }
+    
+    // retorna ArrayList<String> de naipes da mao do dealer
+    public ArrayList<String> getNaipesDealer(){
+    	return partida.retornaListaCartas(partida.getMaoDealer());
+    }
+    // retorna ArrayList<String> de naipes da mao principal
+    public ArrayList<String> getNaipesPrincipal(){
+    	return partida.retornaListaCartas(partida.getMaoPrincipal());
+    }
+    
+ // retorna ArrayList<String> de naipes da mao split
+    public ArrayList<String> getNaipesSplit(){
+    	return partida.retornaListaCartas(partida.getMaoSplit());
+    }
+    
+    public int calculaValorMaoDealer() {
+    	return partida.getMaoDealer().calculaValorMao();
+    }
+    
+    public int calculaValorMaoPrincipal() {
+    	return partida.getMaoPrincipal().calculaValorMao();
+    }
+
+    public int calculaValorMaoSplit() {
+    	return partida.getMaoSplit().calculaValorMao();
+    }
+    
+    // retorna naipe da primeira carta da mao
+    public String getPrimeiroNaipeDealer() {
+    	return getNaipesDealer().getFirst();
+    }
+    
+    public String getPrimeiroNaipePrincipal() {
+    	return getNaipesPrincipal().getFirst();
+    }
+    
+    public String getPrimeiroNaipeSplit() {
+    	return getNaipesSplit().getFirst();
+    }
+    
+    public String getUltimoNaipeDealer() {
+    	return getNaipesDealer().getLast();
+    }
+    
+    public String getUltimoNaipePrincipal() {
+    	return getNaipesPrincipal().getLast();
+    }
+    
+    public String getUltimoNaipeSplit() {
+    	return getNaipesSplit().getLast();
+    }
+    
+    // double remover
+    public int calculaValorMaoAnterior() {
+    	return partida.getMaoAnterior().calculaValorMao();
+    }
+    
+    public String getNaipeMaoAnterior() {
+    	return partida.getMaoAnterior().getLista_cartas().getLast().getNaipe();
+    }
+    
+    public int getApostaMaoAnterior() {
+    	return partida.getMaoAnterior().getAposta();
+    }
+    
+    public void distribuiCarta() {
+    	partida.distribuiCarta();
+    }
+    
+    public void jogaDealer() {
+    	partida.jogaDealer();
+    }
+    
+    public List<Integer> checkStatusPartida(){
+    	return partida.checkStatusPartida();
+    }
+  
 
 
 }
