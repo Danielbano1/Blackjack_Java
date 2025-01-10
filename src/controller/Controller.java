@@ -127,7 +127,7 @@ public class Controller {
     void distribuirCartas() {
         // Distribui as cartas
         partida.distribuiCarta();
-        partida.getMaoJogador().getLista_cartas();
+        
         // Configurações para o Dealer
         maoDealer.atualizarPontos(partida.calculaValorMaoDealer());
         maoDealer.receberCarta(partida.getPrimeiroNaipeDealer());
