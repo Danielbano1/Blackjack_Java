@@ -12,7 +12,7 @@ import java.util.*;
 
     }
 
-    private MaoJogador(List<Carta> cartas, int aposta) {
+    MaoJogador(List<Carta> cartas, int aposta) {
         super(cartas);
         this.aposta = aposta;
     }
