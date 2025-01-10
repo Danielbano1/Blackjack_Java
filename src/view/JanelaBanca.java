@@ -68,7 +68,7 @@ public class JanelaBanca extends JFrame {
         }
     }
 
-    public Rectangle[] getFichasBounds(){
+    public Rectangle[] getFichaBounds(){
         return fichasBounds;
     }
 

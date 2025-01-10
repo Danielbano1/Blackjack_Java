@@ -23,7 +23,7 @@ public class TratadorDeClicks {
         partida = controller.partida;
 
         configurarBotoes();
-        fichaBounds = janelaBanca.getFichasBounds();
+        fichaBounds = janelaBanca.getFichaBounds();
         tratadorDeClicks();
 
     }
