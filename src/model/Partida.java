@@ -307,5 +307,13 @@ public class Partida {
         return maos.getLast();
     }
     //estruturtas para a fachada 
+    //verifica se uma ficha pode ser retirada
+    public boolean checkReducao(int valorFicha) {
+    	return (getMaoJogador().getAposta()-1 >= 0);
+    }
+    //retorna o estado atual
+    public boolean estadoAtual(Estado estadoAtual) {
+    	return gerenciadorDeEstados.getEstadoAtual() == estadoAtual;
+    }
     
 }

@@ -7,6 +7,7 @@ import java.util.*;
     private int aposta;
 
     MaoJogador() {
+    	
         super();
         aposta = 0;
 

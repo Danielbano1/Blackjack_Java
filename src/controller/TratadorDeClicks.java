@@ -54,34 +54,34 @@ public class TratadorDeClicks {
                         if (fichaBounds[i] != null && fichaBounds[i].contains(p)) {
                             System.out.println("Ficha " + (i + 1) + " clicada!");
                             if (i == 0) {
-                                if (e.getButton() == MouseEvent.BUTTON3  && (partida.getMaoJogador().getAposta()-1) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && partida.checkReducao(-1))
                                     aposta = -1;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 1;
                             }
 
                             else if (i == 1) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-5) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && partida.checkReducao(-5))
                                     aposta = -5;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 5;
                             } else if (i == 2) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-10) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && partida.checkReducao(-10))
                                     aposta = -10;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 10;
                             } else if (i == 3) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-20) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && partida.checkReducao(-20))
                                     aposta = -20;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 20;
                             } else if (i == 4) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-50) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && partida.checkReducao(-50))
                                     aposta = -50;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 50;
                             } else if (i == 5) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && (partida.getMaoJogador().getAposta()-100) >= 0)
+                                if (e.getButton() == MouseEvent.BUTTON3 && partida.checkReducao(-100))
                                     aposta = -100;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 100;
@@ -94,7 +94,7 @@ public class TratadorDeClicks {
                     controller.fazerApostas();
                 }
 
-                if (partida.gerenciadorDeEstados.getEstadoAtual() == Estado.JOGO) {
+                if (partida.estadoAtual(Estado.JOGO)) {
                     for (int i = 0; i < botoesBounds.length; i++) {
                         if (botoesBounds[i].contains(p)) {
                             System.out.println("Botão '" + botoesLabels[i] + "' clicado!");
@@ -157,7 +157,7 @@ public class TratadorDeClicks {
 
                     }
                 }
-                if (partida.gerenciadorDeEstados.getEstadoAtual() == Estado.DEALER) {
+                if (partida.estadoAtual(Estado.DEALER)) {
                     controller.jogaDealer();
                 }
 
