@@ -2,14 +2,13 @@ package model;
 
 import model.Partida;
 public class APImodel {
-	 
 	private Partida partida;
-	
 	private GerenciadorDeEstados gerenciadorDeEstados;
 	
 	
-	public APImodel(Partida partida) {
+	private APImodel(Partida partida) {
 		this.partida = partida;
+		gerenciadorDeEstados = this.partida.gerenciadorDeEstados;
 	}
 	
 	//estruturtas para a fachada 

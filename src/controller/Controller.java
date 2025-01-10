@@ -3,11 +3,11 @@ package controller;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import model.GerenciadorDeEstados;
+import model.APImodel;
 import model.Partida;
 import view.*;
 
@@ -171,7 +171,7 @@ public class Controller {
         for (int i = naipes.size(); i > 2; i--)
             maoDealer.receberCarta(naipes.get(i - 1));
 
-        partida.gerenciadorDeEstados.proxEstado();
+        
         exibeResultados();
         maoJogador.atualizarDinheiro(partida.getDinheiro());
         maoJogadorSplit.atualizarDinheiro(partida.getDinheiro());
