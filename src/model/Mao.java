@@ -17,7 +17,7 @@ import java.util.*;
     void addCarta(Carta carta) {
         lista_cartas.add(carta);
         for(ObservadorIF o : observadores) {
-        	o.notificaAddCarta(this);
+        	o.notificaAddCarta(carta.getNaipe());
         }
     }
 
@@ -51,16 +51,15 @@ import java.util.*;
     }
     
     // Observer
+    @Override
     public void add(ObservadorIF o){
         observadores.add(o);
     }
-
+    
+    @Override
     public void remove(ObservadorIF o){
         observadores.remove(o);
     }
 
-    public Object get(){
-        return this;
-    }
 
 }

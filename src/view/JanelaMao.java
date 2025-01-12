@@ -105,22 +105,31 @@ public class JanelaMao extends JFrame implements ObservadorIF {
 	}
 
 	@Override
-	public void notificaAddCarta(ObservadoIF o) {
-		String naipe = o.getCarta();
-		receberCarta(naipe);
+	public void notificaAddCarta(String carta) {
+		receberCarta(carta);
 		
 	}
 	
 	@Override
-	public void notificaRemoveCarta(ObservadoIF o) {
-		String naipe = o.getCarta();
+	public void notificaRemoveCarta(String carta) {
 		removeCarta();
 	}
 	
 	@Override
-	public void notificaPontos(ObservadoIF o) {
-		int pontos = o.getPontos();
+	public void notificaPontos(int pontos) {
 		atualizarPontos(pontos);
+	}
+
+	@Override
+	public void notificaAposta(int aposta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notificaDinheiro(int dinheiro) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

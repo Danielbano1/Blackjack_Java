@@ -1,9 +1,9 @@
 package model;
 
 public interface ObservadorIF {
-	public String notificaAddCarta(ObservadoIF o);
-	public String notificaRemoveCarta(ObservadoIF o);
-	public int notificaPontos(ObservadoIF o);
-	public int notificaAposta(ObservadoIF o);
-	public int notificaDinheiro(ObservadoIF o);
+	public void notificaAddCarta(String carta);
+	public void notificaRemoveCarta(String carta);
+	public void notificaPontos(int pontos);
+	public void notificaAposta(int aposta);
+	public void notificaDinheiro(int dinheiro);
 }

@@ -68,9 +68,12 @@ public class JanelaMaoJogador extends JanelaMao {
     }
     
     @Override
-    public void notificaAposta(ObservadoIF o) {
-    	int aposta = o.getaposta();
+    public void notificaAposta(int aposta) {
     	atualizarAposta(aposta);
+    }
+    @Override
+	public void notificaDinheiro(int dinheiro) {
+    	atualizarDinheiro(dinheiro);
     }
     
 
