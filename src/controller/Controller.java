@@ -63,8 +63,8 @@ public class Controller {
 
     }
     
-    public void mostrarMensagem(String mensagem) {
-        JOptionPane.showMessageDialog(null, mensagem, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+    public void mostrarMensagem(String mensagem, String titulo) {
+        JOptionPane.showMessageDialog(null, mensagem, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void configurarJanelas() {
@@ -218,7 +218,7 @@ public class Controller {
                 placar += "Mao " + (i+1) + "Empate    ";
             }
         }
-        mostrarMensagem(placar);
+        mostrarMensagem(placar, "Resultado");
     }
 
     void fazDouble() {

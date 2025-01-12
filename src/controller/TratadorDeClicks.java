@@ -126,8 +126,11 @@ public class TratadorDeClicks {
                                         controller.distribuir1Carta();
                                     else if(apimodel.getTurnos()==1)
                                         controller.distribuir1CartaSplit();
-                                    if (apimodel.checkPassaOuTermina(0))
-                                        apimodel.terminaTurno();
+                                    if (apimodel.checkPassaOuTermina(0)) {
+                                    	apimodel.terminaTurno();
+                                    	controller.mostrarMensagem("Mão Split", "Turno");
+                                    }
+                                        
                                     else if (apimodel.checkPassaOuTermina(1))
                                         apimodel.passaEstado();
 
@@ -142,10 +145,15 @@ public class TratadorDeClicks {
 
                                 if (!apimodel.isSplit())
                                     apimodel.passaEstado();
-                                else if (apimodel.getTurnos() == 1)
-                                    apimodel.passaEstado();
-
+                                
+                                else if (apimodel.getTurnos() == 1) {
+                                	apimodel.passaEstado();
+                                } 
+                                else
+                                	controller.mostrarMensagem("Mão Split", "Turno");
+                                                    
                                 apimodel.terminaTurno();
+                                
 
                             } else if (i == 7) {
                                 if (apimodel.rendicao()) {
