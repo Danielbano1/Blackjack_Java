@@ -15,7 +15,6 @@ public class Controller {
 	
     public APImodel apiModel;
     private JanelaInicial janelaInicial;
-    private JanelaCarregamento janelaCarregamento;
     private JanelaBanca janelaBanca;
     private JanelaMao maoDealer; 
     private JanelaMaoJogador maoJogador;
@@ -88,7 +87,7 @@ public class Controller {
         // Carregar dinheiro
         maoJogador.atualizarDinheiro(apiModel.getDinheiro());
         maoJogador.atualizarAposta(apiModel.getApostaMaoAtual());
-        maoJogador.repaint();
+        
 
     }
     
@@ -188,15 +187,14 @@ public class Controller {
         //remoção da segunda carta da maojogador
         maoJogador.removeCarta();
         maoJogadorSplit.setVisible(true);
-        maoJogador.repaint();
-        maoJogadorSplit.repaint();
+        
 
         split = true;
     }
 
     void fazSurrender() {
         maoJogador.atualizarDinheiro(apiModel.getDinheiro());
-        maoJogador.repaint();
+        
 
     }
 
@@ -238,8 +236,7 @@ public class Controller {
 
         }
 
-        maoJogador.repaint();
-        maoJogadorSplit.repaint();
+        
 
     }
 
