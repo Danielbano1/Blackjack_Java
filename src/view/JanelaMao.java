@@ -1,92 +1,126 @@
 package view;
 
 import javax.swing.*;
+
+import model.ObservadoIF;
+import model.ObservadorIF;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class JanelaMao extends JFrame {
+public class JanelaMao extends JFrame implements ObservadorIF {
 
-    public enum TipoMao {
-        JOGADOR("Mão do Jogador", "Pontos do Jogador", new Color(0, 100, 0)),
-        DEALER("Mão da Banca", "Pontos da Banca", new Color(85, 26, 0));
+	public enum TipoMao {
+		JOGADOR("Mão do Jogador", "Pontos do Jogador", new Color(0, 100, 0)),
+		DEALER("Mão da Banca", "Pontos da Banca", new Color(85, 26, 0));
 
-        private final String titulo;
-        private final String labelPontos;
-        private final Color corFundo;
+		private final String titulo;
+		private final String labelPontos;
+		private final Color corFundo;
 
-        TipoMao(String titulo, String labelPontos, Color corFundo) {
-            this.titulo = titulo;
-            this.labelPontos = labelPontos;
-            this.corFundo = corFundo;
-        }
+		TipoMao(String titulo, String labelPontos, Color corFundo) {
+			this.titulo = titulo;
+			this.labelPontos = labelPontos;
+			this.corFundo = corFundo;
+		}
 
-        public String getTitulo() { return titulo; }
-        public String getLabelPontos() { return labelPontos; }
-        public Color getCorFundo() { return corFundo; }
-    }
+		public String getTitulo() {
+			return titulo;
+		}
 
-    protected JLabel labelPontos;
-    protected ArrayList<Image> cartas;
+		public String getLabelPontos() {
+			return labelPontos;
+		}
 
-    public JanelaMao(TipoMao tipo) {
-        configurarJanela(tipo);
-        labelPontos = criarLabel(tipo.getLabelPontos() + ": 0", 10, 10, 200, 30);
-        add(labelPontos);
-        cartas = new ArrayList<>();
-        setVisible(true);
-    }
+		public Color getCorFundo() {
+			return corFundo;
+		}
+	}
 
-    private void configurarJanela(TipoMao tipo) {
-        setTitle(tipo.getTitulo());
-        setSize(800, 250);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setBackground(tipo.getCorFundo());
-        setLayout(null);
-    }
+	protected JLabel labelPontos;
+	protected ArrayList<Image> cartas;
 
-    private JLabel criarLabel(String texto, int x, int y, int largura, int altura) {
-        JLabel label = new JLabel(texto);
-        label.setFont(new Font("Arial", Font.BOLD, 18));
-        label.setForeground(Color.WHITE);
-        label.setBounds(x, y, largura, altura);
-        return label;
-    }
+	public JanelaMao(TipoMao tipo) {
+		configurarJanela(tipo);
+		labelPontos = criarLabel(tipo.getLabelPontos() + ": 0", 10, 10, 200, 30);
+		add(labelPontos);
+		cartas = new ArrayList<>();
+		setVisible(true);
+	}
 
-    public void atualizarPontos(int pontos) {
-        String prefixo = labelPontos.getText().split(":")[0];
-        labelPontos.setText(prefixo + ": " + pontos);
-    }
+	private void configurarJanela(TipoMao tipo) {
+		setTitle(tipo.getTitulo());
+		setSize(800, 250);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(tipo.getCorFundo());
+		setLayout(null);
+	}
 
-    public void receberCarta(String nomeDaCarta) {
-        try {
-            Image carta = ImageIO.read(new File("resources/" + nomeDaCarta + ".gif"));
-            cartas.add(carta);
-            repaint();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	private JLabel criarLabel(String texto, int x, int y, int largura, int altura) {
+		JLabel label = new JLabel(texto);
+		label.setFont(new Font("Arial", Font.BOLD, 18));
+		label.setForeground(Color.WHITE);
+		label.setBounds(x, y, largura, altura);
+		return label;
+	}
 
-    public void removeCarta() {
-        cartas.remove(cartas.size()-2);
-        repaint();
-    }
+	public void atualizarPontos(int pontos) {
+		String prefixo = labelPontos.getText().split(":")[0];
+		labelPontos.setText(prefixo + ": " + pontos);
+	}
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
+	public void receberCarta(String nomeDaCarta) {
+		try {
+			Image carta = ImageIO.read(new File("resources/" + nomeDaCarta + ".gif"));
+			cartas.add(carta);
+			repaint();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-        int larguraCarta = 75, alturaCarta = 112, espacamento = 10;
-        int totalLargura = cartas.size() * larguraCarta + (cartas.size() - 1) * espacamento;
-        int xInicial = (getWidth() - totalLargura) / 2, y = 100;
+	public void removeCarta() {
+		cartas.remove(cartas.size() - 2);
+		repaint();
+	}
 
-        for (int i = 0; i < cartas.size(); i++) {
-            g2d.drawImage(cartas.get(i), xInicial + i * (larguraCarta + espacamento), y, larguraCarta, alturaCarta, this);
-        }
-    }
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+
+		int larguraCarta = 75, alturaCarta = 112, espacamento = 10;
+		int totalLargura = cartas.size() * larguraCarta + (cartas.size() - 1) * espacamento;
+		int xInicial = (getWidth() - totalLargura) / 2, y = 100;
+
+		for (int i = 0; i < cartas.size(); i++) {
+			g2d.drawImage(cartas.get(i), xInicial + i * (larguraCarta + espacamento), y, larguraCarta, alturaCarta,
+					this);
+		}
+
+	}
+
+	@Override
+	public void notificaAddCarta(ObservadoIF o) {
+		String naipe = o.getCarta();
+		receberCarta(naipe);
+		
+	}
+	
+	@Override
+	public void notificaRemoveCarta(ObservadoIF o) {
+		String naipe = o.getCarta();
+		removeCarta();
+	}
+	
+	@Override
+	public void notificaPontos(ObservadoIF o) {
+		int pontos = o.getPontos();
+		atualizarPontos(pontos);
+	}
+
 }

@@ -16,6 +16,9 @@ import java.util.*;
     }
     void addCarta(Carta carta) {
         lista_cartas.add(carta);
+        for(ObservadorIF o : observadores) {
+        	o.notificaAddCarta(this);
+        }
     }
 
     int calculaValorMao() {

@@ -3,6 +3,8 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
+import model.ObservadoIF;
+
 public class JanelaMaoJogador extends JanelaMao {
     private JLabel labelAposta;
     private JLabel labelDinheiro;
@@ -64,6 +66,13 @@ public class JanelaMaoJogador extends JanelaMao {
             g2d.drawImage(cartas.get(i), xInicial + i * (larguraCarta + espacamento), y, larguraCarta, alturaCarta, this);
         }
     }
+    
+    @Override
+    public void notificaAposta(ObservadoIF o) {
+    	int aposta = o.getaposta();
+    	atualizarAposta(aposta);
+    }
+    
 
 
 }
