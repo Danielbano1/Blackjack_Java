@@ -119,29 +119,29 @@ public class TratadorDeClicks {
                                     }
                                     System.out.println("Valido 2");
                                 }
-                            } else if (i == 5 ) {
-                                if (!apimodel.checkEstouro()) {
-                                    apimodel.hit();
-                                    if(apimodel.getTurnos()==0)
-                                        controller.distribuir1Carta();
-                                    else if(apimodel.getTurnos()==1)
-                                        controller.distribuir1CartaSplit();
-                                    if (apimodel.checkPassaOuTermina(0)) {
-                                    	apimodel.terminaTurno();
-                                    	controller.mostrarMensagem("Mão Split", "Turno");
-                                    }
-                                        
-                                    else if (apimodel.checkPassaOuTermina(1))
-                                        apimodel.passaEstado();
+							} else if (i == 5) {
+								if (!apimodel.checkEstouro()) {
+									apimodel.hit();
+									if (apimodel.getTurnos() == 0)
+										controller.distribuir1Carta();
+									else if (apimodel.getTurnos() == 1)
+										controller.distribuir1CartaSplit();
+									if (apimodel.checkPassaOuTermina(0)) {
+										apimodel.terminaTurno();
+										if (apimodel.isSplit())
+											controller.mostrarMensagem("Mão Split", "Turno");
+									}
 
-                                }
-                                else {
-                                    apimodel.passaEstado();
+									else if (apimodel.checkPassaOuTermina(1))
+										apimodel.passaEstado();
 
-                                }
-                                System.out.println("valido 5");
+								} else {
+									apimodel.passaEstado();
 
-                            } else if (i == 6) {
+								}
+								System.out.println("valido 5");
+
+							} else if (i == 6) {
 
                                 if (!apimodel.isSplit())
                                     apimodel.passaEstado();

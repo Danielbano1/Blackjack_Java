@@ -215,7 +215,7 @@ public class Controller {
             } else if (resultados.get(i) == -1) {
                 placar +=  "Mao " + (i+1) + " perdeu    ";
             } else {
-                placar += "Mao " + (i+1) + "Empate    ";
+                placar += "Mao " + (i+1) + " Empate    ";
             }
         }
         mostrarMensagem(placar, "Resultado");
