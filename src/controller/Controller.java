@@ -11,6 +11,8 @@ import model.APImodel;
 import model.SalvarPartida;
 import view.*;
 
+import javax.swing.JOptionPane;
+
 public class Controller {
 	
     public APImodel apiModel;
@@ -59,6 +61,10 @@ public class Controller {
         maoJogadorSplit.setVisible(split);
         distribuirCartasSalvas();
 
+    }
+    
+    public void mostrarMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "Resultado", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void configurarJanelas() {
@@ -212,7 +218,7 @@ public class Controller {
                 placar += "Mao " + (i+1) + "Empate    ";
             }
         }
-        //janelaBanca.exibePlacar(placar);
+        mostrarMensagem(placar);
     }
 
     void fazDouble() {

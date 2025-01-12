@@ -55,34 +55,34 @@ public class TratadorDeClicks {
                         if (fichaBounds[i] != null && fichaBounds[i].contains(p)) {
                             System.out.println("Ficha " + (i + 1) + " clicada!");
                             if (i == 0) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-1))
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(1))
                                     aposta = -1;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 1;
                             }
 
                             else if (i == 1) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-5))
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(5))
                                     aposta = -5;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 5;
                             } else if (i == 2) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-10))
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(10))
                                     aposta = -10;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 10;
                             } else if (i == 3) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-20))
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(20))
                                     aposta = -20;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 20;
                             } else if (i == 4) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-50))
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(50))
                                     aposta = -50;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 50;
                             } else if (i == 5) {
-                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(-100))
+                                if (e.getButton() == MouseEvent.BUTTON3 && apimodel.checkReducao(100))
                                     aposta = -100;
                                 else if (e.getButton() == MouseEvent.BUTTON1)
                                     aposta = 100;
@@ -93,6 +93,7 @@ public class TratadorDeClicks {
                         }
                     }
                     controller.fazerApostas();
+                    
                 }
 
                 if (apimodel.partidaEstadoJogo()) {

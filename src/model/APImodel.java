@@ -18,7 +18,6 @@ public class APImodel {
 		this.partida = new Partida(infos);
 		gerenciadorDeEstados = this.partida.gerenciadorDeEstados;
 	}
-
 	
 	//estruturtas para a fachada 
 	
