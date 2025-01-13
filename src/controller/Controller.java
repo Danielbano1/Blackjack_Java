@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.APImodel;
+import model.ObservadorIF;
 import model.SalvarPartida;
 import view.*;
 
@@ -44,6 +45,7 @@ public class Controller {
         apiModel = new APImodel();
         janelaBanca = new JanelaBanca();
         configurarJanelas();
+        apiModel.addObsever(maoDealer, maoJogador);
         tratador = new TratadorDeClicks(this, janelaBanca);
         split = false;
 
@@ -53,9 +55,12 @@ public class Controller {
         apiModel = new APImodel(lista);
         janelaBanca = new JanelaBanca();
         configurarJanelas();
+        apiModel.addObsever(maoDealer, maoJogador);
         tratador = new TratadorDeClicks(this, janelaBanca);
         split = (boolean) lista.get(2);
         maoJogadorSplit.setVisible(split);
+        if(split == true)
+        	apiModel.addObserverSplit(maoJogadorSplit);
         distribuirCartasSalvas();
 
     }
@@ -91,35 +96,15 @@ public class Controller {
 
     }
     
-    void distribuirCartasSalvas(){
-        // Configurações para o Dealer
-        ArrayList<String> naipes = apiModel.getNaipesDealer();
-        maoDealer.atualizarPontos(apiModel.calculaValorMaoDealer());
-
-        for (String naipe : naipes){
-            maoDealer.receberCarta(naipe);
-        }
+    void distribuirCartasSalvas() {
         // Configurações para o Jogador Principal
-        naipes = apiModel.getNaipesPrincipal();
         maoJogador.atualizarDinheiro(apiModel.getDinheiro());
-        maoJogador.atualizarPontos(apiModel.calculaValorMaoPrincipal());
         maoJogador.atualizarAposta(apiModel.getApostaMaoPrincipal());
-
-        for (String naipe : naipes){
-            maoJogador.receberCarta(naipe);
-        }
 
         if(apiModel.isSplit()) {
             // Configurações para o Jogador Split
-            naipes = apiModel.getNaipesSplit();
             maoJogadorSplit.atualizarDinheiro(apiModel.getDinheiro());
-            maoJogadorSplit.atualizarPontos(apiModel.calculaValorMaoSplit());
             maoJogadorSplit.atualizarAposta(apiModel.getApostaMaoSplit());
-
-
-            for (String naipe : naipes){
-                maoJogadorSplit.receberCarta(naipe);
-            }
         }
     }
 
@@ -127,50 +112,11 @@ public class Controller {
         // Distribui as cartas
         apiModel.distribuiCarta();
         
-        // Configurações para o Dealer
-        maoDealer.atualizarPontos(apiModel.calculaValorMaoDealer());
-        maoDealer.receberCarta(apiModel.getPrimeiroNaipeDealer());
-        maoDealer.receberCarta(apiModel.getUltimoNaipeDealer());
-
-        // Configurações para o Jogador Principal
-        maoJogador.atualizarPontos(apiModel.calculaValorMaoPrincipal());
-        maoJogador.receberCarta(apiModel.getPrimeiroNaipePrincipal());
-        maoJogador.receberCarta(apiModel.getUltimoNaipePrincipal());
-
     }
-
-    void distribuir1Carta() {
-        // Configurações para o Jogador Principal
-        maoJogador.atualizarPontos(apiModel.calculaValorMaoPrincipal());
-        maoJogador.receberCarta(apiModel.getUltimoNaipePrincipal());
-
-    }
-    void distribuirCartaSplit() {
-        // Configurações para o Split Principal
-        maoJogadorSplit.atualizarPontos(apiModel.calculaValorMaoSplit());
-        maoJogadorSplit.receberCarta(apiModel.getPrimeiroNaipeSplit());
-        maoJogadorSplit.receberCarta(apiModel.getUltimoNaipeSplit());
-
-    }
-
-    void distribuir1CartaSplit() {
-        // Configurações para o split Principal
-        maoJogadorSplit.atualizarPontos(apiModel.calculaValorMaoSplit());
-        maoJogadorSplit.receberCarta(apiModel.getUltimoNaipeSplit());
-
-    }
-
 
     void jogaDealer() {
         apiModel.jogaDealer();
-        // Configurações para o Dealer
-        ArrayList<String> naipes = apiModel.getNaipesDealer();
-        maoDealer.atualizarPontos(apiModel.calculaValorMaoDealer());
-
-        for (int i = naipes.size(); i > 2; i--)
-            maoDealer.receberCarta(naipes.get(i - 1));
-
-        
+     
         exibeResultados();
         maoJogador.atualizarDinheiro(apiModel.getDinheiro());
         maoJogadorSplit.atualizarDinheiro(apiModel.getDinheiro());
@@ -181,15 +127,13 @@ public class Controller {
         maoJogadorSplit.atualizarAposta(apiModel.getApostaMaoAtual());
         maoJogador.atualizarDinheiro(apiModel.getDinheiro());
         maoJogadorSplit.atualizarDinheiro(apiModel.getDinheiro());
-        //distribuição de cartas
-        distribuirCartaSplit();
-        distribuir1Carta();
         //remoção da segunda carta da maojogador
         maoJogador.removeCarta();
         maoJogadorSplit.setVisible(true);
         
 
         split = true;
+        apiModel.addObserverSplit(maoJogadorSplit);
     }
 
     void fazSurrender() {
@@ -216,9 +160,6 @@ public class Controller {
     void fazDouble() {
     	
         if (apiModel.getTurnos() == 1) { // turno mao principal
-            maoJogador.atualizarPontos(apiModel.calculaValorMaoAnterior());
-            maoJogador.receberCarta(apiModel.getNaipeMaoAnterior());
-            System.out.println("teste aposta jogador");
             maoJogador.atualizarDinheiro(apiModel.getDinheiro());
             maoJogador.atualizarAposta(apiModel.getApostaMaoAnterior());
             if (!apiModel.isSplit())
@@ -226,9 +167,6 @@ public class Controller {
 
         }
         if (apiModel.isSplit() && apiModel.getTurnos() == 2) { // turno split
-            maoJogadorSplit.atualizarPontos(apiModel.calculaValorMaoAnterior());
-            maoJogadorSplit.receberCarta(apiModel.getNaipeMaoAnterior());
-            System.out.println("teste aposta split");
             maoJogadorSplit.atualizarDinheiro(apiModel.getDinheiro());
             maoJogadorSplit.atualizarAposta(apiModel.getApostaMaoAnterior());
             maoJogador.atualizarDinheiro(apiModel.getDinheiro());

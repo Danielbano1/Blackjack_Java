@@ -121,12 +121,7 @@ public class TratadorDeClicks {
                             } else if (i == 5 ) {
                                 if (!apimodel.checkEstouro()) {
                                     apimodel.hit();
-                                    if(apimodel.getTurnos()==0)
-                                        controller.distribuir1Carta();
-                                    else if(apimodel.getTurnos()==1)
-                                        controller.distribuir1CartaSplit();
-                                    if (apimodel.checkPassaOuTermina(0))
-                                        apimodel.terminaTurno();
+                                }
                                     else if (apimodel.checkPassaOuTermina(1))
                                         apimodel.passaEstado();
 
@@ -147,6 +142,7 @@ public class TratadorDeClicks {
                                 apimodel.terminaTurno();
 
                             } else if (i == 7) {
+                            	System.out.println("valido 7");
                                 if (apimodel.rendicao()) {
                                     controller.fazSurrender();
                                     apimodel.defineEstadoFim();
@@ -157,7 +153,7 @@ public class TratadorDeClicks {
                         }
 
                     }
-                }
+                
                 if (apimodel.partidaEstadoDealer()) {
                     controller.jogaDealer();
                 }

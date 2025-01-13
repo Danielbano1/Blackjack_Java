@@ -192,6 +192,23 @@ public class APImodel {
     public List<Integer> checkStatusPartida(){
     	return partida.checkStatusPartida();
     }
+    
+    public void addObserverDealer(ObservadorIF o) {
+    	partida.getMaoDealer().add(o);
+    }
+    
+    public void addObserverPrincipal(ObservadorIF o) {
+    	partida.getMaoPrincipal().add(o);
+    }
+    
+    public void addObserverSplit(ObservadorIF o) {
+    	partida.getMaoSplit().add(o);
+    }
+    
+    public void addObsever(ObservadorIF dealer, ObservadorIF principal) {
+    	addObserverDealer(dealer);
+    	addObserverPrincipal(principal);
+    }
   
 
 

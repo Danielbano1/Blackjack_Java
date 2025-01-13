@@ -5,7 +5,7 @@ import java.util.*;
  class Mao implements ObservadoIF {
 
     private ArrayList<Carta> lista_cartas;
-    private List<ObservadorIF> observadores = new ArrayList<ObservadorIF>();
+    protected List<ObservadorIF> observadores = new ArrayList<ObservadorIF>();
 
     Mao() {	//construtor
         this.lista_cartas = new ArrayList<>();  // cria uma lista para as cartas na mao						
@@ -18,6 +18,7 @@ import java.util.*;
         lista_cartas.add(carta);
         for(ObservadorIF o : observadores) {
         	o.notificaAddCarta(carta.getNaipe());
+        	o.notificaPontos(calculaValorMao());
         }
     }
 

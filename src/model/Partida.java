@@ -19,6 +19,7 @@ public class Partida {
         maos.addFirst(new MaoJogador()); /* adiciona mao do Jogador */
         turnos = 0;
         baralho = Baralho.getInstancia();
+        baralho.embaralhar();
         gerenciadorDeEstados = new GerenciadorDeEstados();
 
     }
