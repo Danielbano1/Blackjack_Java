@@ -47,6 +47,7 @@ public class TratadorDeClicks {
                             System.out.println("Aposta validada");
                             apimodel.passaEstado();
                             controller.distribuirCartas();
+                            controller.mostrarMensagem("Mão Principal", "Turno");
                         } else
                             System.out.println("Aposta abaixo de 50");
                     }
@@ -116,6 +117,7 @@ public class TratadorDeClicks {
                                     apimodel.split();
                                     if (apimodel.isSplit()) {
                                         controller.fazSplit();
+                                        controller.mostrarMensagem("Mão Principal", "Turno");
                                     }
                                     System.out.println("Valido 2");
                                 }
@@ -178,7 +180,8 @@ public class TratadorDeClicks {
 
 
     private void configurarBotoes() {
-        botoesBounds = new Rectangle[] { new Rectangle(25, 600, 140, 50), // EXIT
+        botoesBounds = new Rectangle[] { 
+        		new Rectangle(25, 600, 140, 50), // EXIT
                 new Rectangle(220, 700, 140, 50), // DOUBLE
                 new Rectangle(360, 700, 140, 50), // SPLIT
                 new Rectangle(510, 700, 140, 50), // CLEAR
