@@ -35,7 +35,7 @@ public class Controller {
                     System.out.println("Botão 'Novo Jogo' clicado");
                     iniciarJogo();
                 } else if (janelaInicial.getBotaoCarregarJogo().contains(p)) {
-                    iniciarJogo(apiModel.carregarPartida(1));
+                    iniciarJogo(apiModel.carregarPartida());
                     System.out.println("Botão 'Continuar Jogo' clicado");
                 }
             }
