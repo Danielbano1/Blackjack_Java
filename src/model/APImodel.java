@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Partida;
 public class APImodel {
 	private Partida partida;
 	private GerenciadorDeEstados gerenciadorDeEstados;
@@ -22,8 +21,8 @@ public class APImodel {
 	
 	//estruturtas para a fachada 
 	
-	public static List<Object> carregarPartida(int nome){
-		return SalvarPartida.carregarPartida(nome);
+	public static List<Object> carregarPartida(){
+		return SalvarPartida.carregarPartida();
 		
 	}
 	
