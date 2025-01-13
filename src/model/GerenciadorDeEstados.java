@@ -32,6 +32,10 @@ public class GerenciadorDeEstados {
 
         }
     }
+    
+    public void reiniciar() {
+    	setEstadoAtual(Estado.APOSTA);
+    }
 
     public void setEstadoAtual(Estado novoEstado) {
         this.estadoAtual = novoEstado;

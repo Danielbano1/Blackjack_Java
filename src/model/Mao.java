@@ -46,12 +46,13 @@ import java.util.*;
     	lista_cartas.removeLast();
     	for(ObservadorIF o : observadores) {
         	o.notificaRemoveCarta();
+        	o.notificaPontos(calculaValorMao());
         }
     }
     
 
     void limpaMao() {
-        for(Carta carta:lista_cartas) {
+        while(lista_cartas.size() > 0) {
         	removerCarta();
         }
     }

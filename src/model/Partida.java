@@ -42,6 +42,26 @@ class Partida {
 		gerenciadorDeEstados.setEstadoAtual(Estado.JOGO);
 
 	}
+	
+	public void destroiSplit() {
+		maos.remove(1);
+	}
+	
+	public void proxPartida() {
+		// limpar maos
+		getMaoDealer().limpaMao();
+		getMaoPrincipal().limpaMao();
+		if(isSplit())
+			getMaoSplit().limpaMao();
+		// limpar apostas
+		getMaoPrincipal().setAposta(0);
+		if(isSplit()) {
+			getMaoSplit().setAposta(0);
+			destroiSplit();
+		}
+		gerenciadorDeEstados.reiniciar();
+		turnos = 0;
+	}
 
 	public void hit() {
 		Mao maoAtual = maos.get(turnos);

@@ -105,6 +105,13 @@ public class Controller {
     public void mostrarMensagem(String mensagem, String titulo) {
         JOptionPane.showMessageDialog(null, mensagem, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
+    void proxPartida() {
+    	apiModel.proxPartida();
+    	maoJogadorSplit.setVisible(false);
+        split = false;
+        if(apiModel.getDinheiro() < 50)
+        	mostrarMensagem("Game Over", "Fim de Jogo");
+    }
 
     void exibeResultados(){
         List<Integer> resultados = apiModel.checkStatusPartida();
@@ -119,7 +126,9 @@ public class Controller {
             }
         }
         mostrarMensagem(placar, "Resultado");
+        proxPartida();
     }
+  
     
     JanelaMaoJogador getMaoJogadorSplit() {
     	return maoJogadorSplit;

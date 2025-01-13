@@ -211,6 +211,10 @@ public class APImodel {
     	addObserverDealer(dealer);
     	addObserverPrincipal(principal);
     }
+    
+    public void proxPartida() {
+    	partida.proxPartida();
+    }
   
 
 
