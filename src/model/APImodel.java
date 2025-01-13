@@ -14,8 +14,8 @@ public class APImodel {
 		gerenciadorDeEstados = this.partida.gerenciadorDeEstados;
 	}
 	
-	public APImodel(List<Object> infos) {
-		this.partida = new Partida(infos);
+	public APImodel(List<Object> infos, ObservadorIF d, ObservadorIF p, ObservadorIF s) {
+		this.partida = new Partida(infos, d, p, s);
 		gerenciadorDeEstados = this.partida.gerenciadorDeEstados;
 	}
 
@@ -83,8 +83,8 @@ public class APImodel {
     public boolean doDouble() {
     	return partida.doDouble();
     }
-    public void split() {
-    	partida.split();
+    public void split(ObservadorIF o) {
+    	partida.split(o);
     }
     public boolean isSplit() {
         return partida.isSplit();
@@ -199,10 +199,13 @@ public class APImodel {
     
     public void addObserverPrincipal(ObservadorIF o) {
     	partida.getMaoPrincipal().add(o);
+    	partida.dinheiro.add(o);
     }
     
     public void addObserverSplit(ObservadorIF o) {
     	partida.getMaoSplit().add(o);
+    	partida.dinheiro.add(o);
+    	o.notificaDinheiro(getDinheiro());
     }
     
     public void addObsever(ObservadorIF dealer, ObservadorIF principal) {

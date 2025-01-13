@@ -5,14 +5,18 @@ import java.util.*;
  class Mao implements ObservadoIF {
 
     private ArrayList<Carta> lista_cartas;
-    protected List<ObservadorIF> observadores = new ArrayList<ObservadorIF>();
+    List<ObservadorIF> observadores = new ArrayList<ObservadorIF>();
 
     Mao() {	//construtor
         this.lista_cartas = new ArrayList<>();  // cria uma lista para as cartas na mao						
     }
 
-    Mao(List<Carta> cartas){
-        this.lista_cartas = (ArrayList<Carta>) cartas;
+    Mao(List<Carta> cartas, ObservadorIF o){
+    	add(o);
+    	lista_cartas = new ArrayList<>();
+        for(Carta carta:cartas) {
+        	addCarta(carta);
+        }
     }
     void addCarta(Carta carta) {
         lista_cartas.add(carta);
@@ -38,9 +42,18 @@ import java.util.*;
         return total;
     }
     
+    void removerCarta() {
+    	lista_cartas.removeLast();
+    	for(ObservadorIF o : observadores) {
+        	o.notificaRemoveCarta();
+        }
+    }
+    
 
     void limpaMao() {
-        lista_cartas.clear();
+        for(Carta carta:lista_cartas) {
+        	removerCarta();
+        }
     }
 
     ArrayList<Carta> getLista_cartas() {
@@ -55,6 +68,7 @@ import java.util.*;
     @Override
     public void add(ObservadorIF o){
         observadores.add(o);
+        
     }
     
     @Override

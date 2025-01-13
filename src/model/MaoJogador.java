@@ -13,17 +13,23 @@ import java.util.*;
 
     }
 
-    MaoJogador(List<Carta> cartas, int aposta) {
-        super(cartas);
-        this.aposta = aposta;
+    MaoJogador(List<Carta> cartas, int aposta, ObservadorIF o) {
+        super(cartas, o);
+        setAposta(aposta);
     }
 
     void aumentarAposta(int valor) {
         aposta += valor;
+        for(ObservadorIF o : observadores) {
+        	o.notificaAposta(aposta);
+        }
     }
 
     void setAposta(int aposta) {
         this.aposta = aposta;
+        for(ObservadorIF o : observadores) {
+        	o.notificaAposta(aposta);
+        }
     }
 
     int getAposta() {

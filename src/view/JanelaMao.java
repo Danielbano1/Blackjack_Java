@@ -84,7 +84,7 @@ public class JanelaMao extends JFrame implements ObservadorIF {
 	}
 
 	public void removeCarta() {
-		cartas.remove(cartas.size() - 2);
+		cartas.removeLast();
 		repaint();
 	}
 
@@ -111,7 +111,7 @@ public class JanelaMao extends JFrame implements ObservadorIF {
 	}
 	
 	@Override
-	public void notificaRemoveCarta(String carta) {
+	public void notificaRemoveCarta() {
 		removeCarta();
 	}
 	
