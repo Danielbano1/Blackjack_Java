@@ -128,7 +128,11 @@ class Partida {
 			if (checkAposta(aposta)) {
 
 				hit(maoAtual);
+				if(getTurnos() == 1) {
+					gerenciadorDeEstados.proxEstado();
+				}
 				terminaTurno();
+				
 				return true;
 
 			} else

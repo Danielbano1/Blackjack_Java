@@ -9,12 +9,13 @@ import java.util.List;
 
 import model.APImodel;
 import model.ObservadorIF;
-import model.SalvarPartida;
 import view.*;
+
+import javax.swing.JOptionPane;
 
 public class Controller {
 	
-    public APImodel apiModel;
+    public APImodel apiModel;   
     private JanelaInicial janelaInicial;
     private JanelaBanca janelaBanca;
     private JanelaMao maoDealer; 
@@ -100,6 +101,10 @@ public class Controller {
     	maoJogadorSplit.setVisible(true);
         split = true;
     }
+    
+    public void mostrarMensagem(String mensagem, String titulo) {
+        JOptionPane.showMessageDialog(null, mensagem, titulo, JOptionPane.INFORMATION_MESSAGE);
+    }
 
     void exibeResultados(){
         List<Integer> resultados = apiModel.checkStatusPartida();
@@ -113,7 +118,7 @@ public class Controller {
                 placar += "Mao " + (i+1) + "Empate    ";
             }
         }
-        //janelaBanca.exibePlacar(placar);
+        mostrarMensagem(placar, "Resultado");
     }
     
     JanelaMaoJogador getMaoJogadorSplit() {

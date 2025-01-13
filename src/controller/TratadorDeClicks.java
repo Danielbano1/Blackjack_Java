@@ -41,12 +41,13 @@ public class TratadorDeClicks {
 					}
 
 					else if (botoesBounds[4].contains(p)) {
-						if (apimodel.validaAposta()) {
-							System.out.println("Aposta validada");
-							apimodel.passaEstado();
-							controller.distribuirCartas();
-						} else
-							System.out.println("Aposta abaixo de 50");
+                        if (apimodel.validaAposta()) {
+                            System.out.println("Aposta validada");
+                            apimodel.passaEstado();
+                            controller.distribuirCartas();
+                            controller.mostrarMensagem("Mão Principal", "Turno");
+                        } else
+                            System.out.println("Aposta abaixo de 50");
 					}
 
 					for (int i = 0; i < fichaBounds.length; i++) {
@@ -87,7 +88,7 @@ public class TratadorDeClicks {
 							}
 
 							if (apimodel.checkAposta(aposta) == false)
-								System.out.println("Dinheiro insuficiente");
+								controller.mostrarMensagem("Dinheiro insuficiente", "informação");
 						}
 					}
 				}
@@ -102,7 +103,11 @@ public class TratadorDeClicks {
 
 							} else if (i == 1) {
 								apimodel.doDouble();
-								
+								if (apimodel.isSplit()) {
+									if(apimodel.getTurnos() == 1)
+                                    controller.mostrarMensagem("Mão Split", "Turno");
+								 }
+
 								System.out.println("valido 1");
 
 							} else if (i == 2) {
@@ -110,6 +115,7 @@ public class TratadorDeClicks {
 									apimodel.split(controller.getMaoJogadorSplit());
 									if (apimodel.isSplit()) {
 										controller.fazSplit();
+										controller.mostrarMensagem("Mão Principal", "Turno");
 									}
 									System.out.println("Valido 2");
 								}
@@ -120,8 +126,11 @@ public class TratadorDeClicks {
 									apimodel.passaEstado();
 								} else {
 									apimodel.passaEstado();
-
 								}
+								
+								 if (apimodel.isSplit()) {
+                                     controller.mostrarMensagem("Mão Split", "Turno");
+								 }
 								System.out.println("valido 5");
 
 							} else if (i == 6) {
@@ -130,6 +139,9 @@ public class TratadorDeClicks {
 									apimodel.passaEstado();
 								else if (apimodel.getTurnos() == 1)
 									apimodel.passaEstado();
+								else {
+									controller.mostrarMensagem("Mão Split", "Turno");
+								}
 
 								apimodel.terminaTurno();
 
